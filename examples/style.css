@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background: #090909;
+    overflow: hidden;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif;
+    color: #cfd7e3;
+}
+
+.plot-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.plot-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #1b1c1d;
+    border-radius: 0;
+    overflow: hidden;
+    background: #101011;
+    min-height: 0;
+}
+
+.plot-shell canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.plot-shell .text-canvas {
+    pointer-events: none;
+    z-index: 2;
+}
+
+.plot-shell .plot-canvas {
+    z-index: 1;
+}
+
+.plot-legend {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px 8px;
+    border: 1px solid #1b1c1d;
+    border-radius: 0;
+    background: rgba(10, 11, 12, 0.55);
+    color: #cfd7e3;
+    font-size: 12px;
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif;
+    line-height: 1;
+    pointer-events: auto;
+    z-index: 3;
+}
+
+.plot-tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-999px, -999px);
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    background: rgba(12, 13, 14, 0.9);
+    color: #cfd7e3;
+    font-size: 11px;
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif;
+    font-weight: 400;
+    line-height: 1.3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 120ms ease;
+    z-index: 4;
+    white-space: nowrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.legend-item.is-off {
+    opacity: 0.45;
+}
+
+.legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 900px) {
+    html,
+    body {
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    body {
+        display: block;
+        padding: 16px;
+    }
+
+    #app {
+        height: auto;
+    }
+
+    .plot-stack {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        grid-auto-rows: minmax(220px, 45vh);
+        height: auto;
+    }
+
+    .plot-shell {
+        min-height: 220px;
+    }
+
+    .plot-shell,
+    .plot-shell canvas {
+        touch-action: pan-y;
+    }
+
+    .plot-shell canvas {
+        pointer-events: none;
+    }
+
+    .plot-legend {
+        pointer-events: none;
+    }
+
+    .plot-tooltip {
+        display: none;
+    }
+}

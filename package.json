@@ -1,0 +1,15 @@
+{
+  "name": "wplot",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "dev": "vite --mode demo"
+  },
+  "devDependencies": {
+    "@webgpu/types": "^0.1.41",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
+  }
+}
