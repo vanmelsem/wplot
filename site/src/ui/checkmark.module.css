@@ -1,0 +1,15 @@
+.checkmark {
+  display: block;
+  width: 10px;
+  height: 10px;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+
+.checkmarkPath {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}

@@ -1,0 +1,101 @@
+{
+  "config": {
+    "SIZES": [
+      55550
+    ],
+    "TRIALS": 2,
+    "DPR": 1
+  },
+  "summary": [
+    {
+      "lib": "wplot",
+      "rows": 55550,
+      "points": 166650,
+      "initMed": 19.5,
+      "hoverMed": -6.399999618530273,
+      "hoverP95": 4.76837158203125e-7,
+      "zoomMed": 0.6500003337860107,
+      "zoomP95": 1.700000286102295
+    },
+    {
+      "lib": "uplot",
+      "rows": 55550,
+      "points": 166650,
+      "initMed": 16.5,
+      "hoverMed": 1.25,
+      "hoverP95": 9,
+      "zoomMed": -1.8999998569488525,
+      "zoomP95": 0.20000028610229492
+    }
+  ],
+  "raw": [
+    {
+      "lib": "wplot",
+      "scenario": "server-events-166650",
+      "rows": 55550,
+      "visibleSeries": 3,
+      "totalPoints": 166650,
+      "prepMs": 2.299999713897705,
+      "chartMs": 26.09999990463257,
+      "hoverBaselineMs": 1011.8999996185303,
+      "hoverTotalMs": 999.0999999046326,
+      "hoverDeltaMs": -12.799999713897705,
+      "zoomBaselineMs": 598.7999997138977,
+      "zoomTotalMs": 600.5,
+      "zoomDeltaMs": 1.700000286102295,
+      "width": 1920,
+      "height": 600
+    },
+    {
+      "lib": "wplot",
+      "scenario": "server-events-166650",
+      "rows": 55550,
+      "visibleSeries": 3,
+      "totalPoints": 166650,
+      "prepMs": 1.299999713897705,
+      "chartMs": 12.900000095367432,
+      "hoverBaselineMs": 1000.0999999046326,
+      "hoverTotalMs": 1000.1000003814697,
+      "hoverDeltaMs": 4.76837158203125e-7,
+      "zoomBaselineMs": 600.5,
+      "zoomTotalMs": 600.1000003814697,
+      "zoomDeltaMs": -0.39999961853027344,
+      "width": 1920,
+      "height": 600
+    },
+    {
+      "lib": "uplot",
+      "scenario": "server-events-166650",
+      "rows": 55550,
+      "visibleSeries": 3,
+      "totalPoints": 166650,
+      "prepMs": 2.3000001907348633,
+      "chartMs": 19.200000286102295,
+      "hoverBaselineMs": 992.0999999046326,
+      "hoverTotalMs": 1001.0999999046326,
+      "hoverDeltaMs": 9,
+      "zoomBaselineMs": 604,
+      "zoomTotalMs": 600,
+      "zoomDeltaMs": -4,
+      "width": 1920,
+      "height": 600
+    },
+    {
+      "lib": "uplot",
+      "scenario": "server-events-166650",
+      "rows": 55550,
+      "visibleSeries": 3,
+      "totalPoints": 166650,
+      "prepMs": 1.5999999046325684,
+      "chartMs": 13.799999713897705,
+      "hoverBaselineMs": 1005.4000000953674,
+      "hoverTotalMs": 998.9000000953674,
+      "hoverDeltaMs": -6.5,
+      "zoomBaselineMs": 599.6999998092651,
+      "zoomTotalMs": 599.9000000953674,
+      "zoomDeltaMs": 0.20000028610229492,
+      "width": 1920,
+      "height": 600
+    }
+  ]
+}

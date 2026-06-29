@@ -1,0 +1,158 @@
+:root {
+  color-scheme: dark;
+
+  --font-sans: system-ui, sans-serif;
+  --font-size-0: 10px;
+  --font-size-1: 12px;
+  --line-height-1: 16px;
+  --font-weight-medium: 500;
+
+  --raw-canvas: #222222;
+  --raw-surface: #2a2a2a;
+  --raw-surface-alpha: #2a2a2aeb;
+  --raw-control: #373737;
+  --raw-border-strong: #555555;
+  --raw-focus: #427fd8;
+
+  /* Raw Paper colors after contrast(1.3). Alpha text/divider tokens stay raw. */
+  --canvas: #060606;
+  --surface: #101010;
+  --surface-alpha: #101010eb;
+  --surface-overlay: var(--surface-alpha);
+  --control: #212121;
+  --border: var(--control);
+  --border-strong: #484848;
+  --divider: #ffffff1a;
+  --focus: #307ff3;
+
+  --content: #ffffffe6;
+  --content-strong: var(--content);
+  --content-muted: #ffffffa6;
+  --content-subtle: #ffffff93;
+  --content-dim: #ffffff80;
+  --content-placeholder: #ffffff80;
+  --content-faint: #ffffff66;
+  --content-disabled: var(--content-faint);
+
+  --icon: var(--content);
+  --icon-muted: var(--content-muted);
+  --icon-dim: var(--content-faint);
+
+  --hover: #ffffff12;
+  --overlay-hover: #ffffff0a;
+  --active: #ffffff18;
+  --row-highlight: #ffffff12;
+  --selection: color-mix(in oklab, var(--focus) 38%, transparent);
+
+  --button: var(--control);
+  --button-hover: color-mix(in srgb, var(--control) 88%, white 12%);
+  --button-active: color-mix(in srgb, var(--control) 82%, white 18%);
+  --button-ghost: transparent;
+  --button-ghost-hover: var(--hover);
+
+  --surface-control: var(--control);
+  --control-hover: var(--button-hover);
+  --control-active: var(--button-active);
+
+  --sidebar: var(--surface);
+  --sidebar-width: 280px;
+  --sidebar-gutter: 12px;
+  --sidebar-border: var(--border);
+  --sidebar-edge: linear-gradient(to right, rgba(255, 255, 255, 0.094) 0.5px, var(--border) 0.5px);
+
+  --scrub-label: var(--content-faint);
+  --scrub-value: var(--content-dim);
+  --scrub-prefix: 24px;
+
+  --checkmark: var(--content);
+  --checkmark-size: 10px;
+  --checkmark-stroke: 1.5px;
+
+  --slider-track: #ffffff1a;
+  --slider-fill: #ffffff40;
+  --slider-thumb: #f9f9f9;
+  --slider-height: 12px;
+  --slider-thumb-size: 12px;
+
+  --tab-track: var(--canvas);
+  --tab-active: var(--surface);
+  --tab-divider: var(--border);
+  --tab-size-sm: 24px;
+  --tab-size-md: 32px;
+  --tab-padding-sm: 8px;
+  --tab-padding-md: 12px;
+
+  --space-025: 1px;
+  --space-050: 2px;
+  --space-100: 4px;
+  --space-150: 6px;
+  --space-200: 8px;
+  --space-300: 12px;
+  --space-400: 16px;
+  --space-500: 20px;
+  --space-600: 24px;
+  --space-800: 32px;
+
+  --radius-control: 5px;
+  --radius-slider: 3px;
+  --radius-panel-sm: 6px;
+  --radius-panel-md: 7.5px;
+  --radius-popover: 12.5px;
+  --radius-highlight: var(--radius-panel-md);
+  --radius-tab: var(--radius-panel-sm);
+  --radius-active-tab: 0px;
+  --radius-button: var(--radius-control);
+
+  --size-control: 24px;
+  --size-section: 32px;
+  --size-tab-sm: var(--tab-size-sm);
+  --size-tab-md: var(--tab-size-md);
+  --size-icon-sm: 10px;
+  --size-icon-md: 12px;
+  --size-icon-lg: 16px;
+
+  --shadow-panel:
+    var(--border-strong) 0 0 0 0.5px,
+    #00000066 0 4px 20px -2px;
+  --shadow-popover: var(--shadow-panel);
+  --shadow-elevated:
+    var(--border-strong) 0 0 0 0.5px,
+    #00000066 0 16px 64px -8px;
+  --shadow-control:
+    #ffffff08 0 1px 0 inset,
+    #ffffff11 0 0 1px 0.5px inset,
+    #00000022 0 1px 0.5px,
+    #000000bb 0 0 3px -1px;
+  --shadow-control-strong:
+    #ffffff08 0 1px 0 inset,
+    #ffffff22 0 0 1px 0.5px inset,
+    #00000022 0 1px 0.5px,
+    #000000bb 0 0 3px -1px;
+  --shadow-slider-thumb:
+    #ffffff88 0 1px 0 inset,
+    #ffffff88 0 0 1px 1px inset,
+    #00000059 0 2px 4px -2px,
+    #0000004d 0 0 1px 0.5px;
+  --shadow-color-thumb:
+    #0000000d 0 0 0 1px,
+    #0000001a 0 0 0 0.5px,
+    #0000004d 0 1px 2px -0.5px;
+  --shadow-tabbar: var(--tab-divider) 0 -1px 0 inset;
+  --shadow-tab:
+    var(--tab-divider) 0 -1px 0,
+    var(--tab-divider) -1px 0 0,
+    var(--tab-divider) 1px 0 0;
+
+  --popup-blur: blur(12px);
+  --blur-popover: var(--popup-blur);
+  --backdrop-filter-popover: var(--popup-blur);
+
+  --overlay-focus: #ffffff2e;
+  --overlay-control-highlight: #ffffff08;
+  --overlay-control-edge: #ffffff11;
+  --overlay-control-edge-strong: #ffffff22;
+  --overlay-cell: #ffffff05;
+  --overlay-cell-border: #ffffff0d;
+  --shadow-control-low: #00000022;
+  --shadow-control-high: #000000bb;
+}

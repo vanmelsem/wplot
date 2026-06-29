@@ -1,0 +1,79 @@
+{
+  "name": "@vanmelsem/wplot",
+  "version": "0.1.0",
+  "description": "Compact, fast Canvas-2D plotting library for large and streaming time-series data.",
+  "type": "module",
+  "license": "MIT",
+  "author": "vanmelsem",
+  "homepage": "https://wplot.vanmelsem.workers.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanmelsem/wplot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vanmelsem/wplot/issues"
+  },
+  "keywords": [
+    "plot",
+    "chart",
+    "canvas",
+    "time-series",
+    "streaming",
+    "visualization",
+    "graph",
+    "realtime"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/wplot.cjs",
+  "module": "./dist/wplot.js",
+  "types": "./dist/types/index.d.ts",
+  "unpkg": "./dist/wplot.iife.js",
+  "jsdelivr": "./dist/wplot.iife.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/wplot.js",
+      "require": "./dist/wplot.cjs",
+      "browser": "./dist/wplot.iife.js"
+    },
+    "./extensions": {
+      "types": "./dist/types/extensions.d.ts",
+      "import": "./dist/extensions.js",
+      "require": "./dist/extensions.cjs"
+    },
+    "./heatmap": {
+      "types": "./dist/types/heatmap.d.ts",
+      "import": "./dist/heatmap.js",
+      "require": "./dist/heatmap.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "trustedDependencies": [
+    "esbuild",
+    "@playwright/test"
+  ],
+  "scripts": {
+    "build": "tsc -b && vite build && tsc -p tsconfig.build.json && bun scripts/minify.mjs",
+    "prepublishOnly": "bun run build",
+    "size": "bun scripts/minify.mjs",
+    "dev": "vite --mode bench --open /benchmark.html",
+    "site": "cd site && bun run dev",
+    "bench": "bun scripts/bench.mjs",
+    "docs": "typedoc",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@webgpu/types": "^0.1.71",
+    "typedoc": "^0.28.19",
+    "typescript": "^5.5.4",
+    "uplot": "^1.6.24",
+    "vite": "^5.4.0",
+    "vitest": "^2.1.9"
+  }
+}

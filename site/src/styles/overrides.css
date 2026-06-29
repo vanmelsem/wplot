@@ -1,0 +1,19 @@
+/* Site overrides on top of the shell design system. The shell components keep
+ * their native radii so menus/controls match the real shell; the page itself is
+ * full-bleed (no rounded card containers), and we kill elastic overscroll for a
+ * native desktop feel. */
+html {
+  /* Kill rubber-band / elastic scroll so it feels native. */
+  overscroll-behavior: none;
+  height: 100%;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* The library owns its canvas stacking inline now; the host just needs a box. */
+.wplot-host {
+  position: relative;
+  display: block;
+}

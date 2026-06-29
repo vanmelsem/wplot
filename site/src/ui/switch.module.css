@@ -1,0 +1,63 @@
+.switchRow {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-150);
+  color: var(--content-strong);
+  cursor: default;
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+  user-select: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  width: 28px;
+  height: 16px;
+  flex: 0 0 auto;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--divider);
+  box-shadow: var(--shadow-control);
+  outline: 0;
+  transition:
+    background 120ms ease,
+    opacity 120ms ease;
+}
+
+.switch:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -1px;
+}
+
+.switch[data-checked] {
+  background: color-mix(in srgb, var(--focus) 60%, var(--control));
+}
+
+.switch[data-disabled] {
+  opacity: 0.5;
+}
+
+.switchThumb {
+  position: absolute;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--content-strong);
+  box-shadow:
+    color-mix(in srgb, var(--content-strong) 40%, transparent) 0 1px 0 inset,
+    var(--shadow-control-low) 0 1px 0.5px,
+    var(--shadow-control-high) 0 0 3px -1px;
+  transition: translate 120ms ease;
+}
+
+.switchThumb[data-checked] {
+  translate: 12px 0;
+}
+
+.controlLabel {
+  min-width: 0;
+  color: inherit;
+}

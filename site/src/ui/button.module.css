@@ -1,0 +1,151 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: var(--size-control);
+  margin: 0;
+  padding: 0 var(--space-200);
+  gap: var(--space-150);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--control);
+  box-shadow: var(--shadow-control);
+  color: var(--content-strong);
+  cursor: default;
+  font: inherit;
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1);
+  outline: 0;
+  text-align: center;
+  user-select: none;
+}
+
+.button:hover:not(:disabled, [data-disabled]) {
+  background: color-mix(in srgb, var(--control) 88%, var(--content-strong) 12%);
+}
+
+.button:active:not(:disabled, [data-disabled]),
+.button[data-popup-open],
+.button[data-pressed] {
+  background: var(--control-active);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -1px;
+}
+
+.button:disabled,
+.button[data-disabled] {
+  color: var(--content-disabled);
+  cursor: default;
+}
+
+.button[data-variant="ghost"] {
+  background: transparent;
+  box-shadow: none;
+}
+
+.button[data-variant="ghost"]:hover:not(:disabled, [data-disabled]),
+.button[data-variant="ghost"][data-popup-open],
+.button[data-variant="ghost"][data-pressed] {
+  background: var(--hover);
+}
+
+.button[data-variant="quiet"] {
+  background: transparent;
+  box-shadow: none;
+  color: var(--content-muted);
+}
+
+.button[data-variant="quiet"]:hover:not(:disabled, [data-disabled]) {
+  background: var(--overlay-hover);
+  color: var(--content-strong);
+}
+
+.button[data-variant="outline"] {
+  background: transparent;
+  box-shadow: var(--divider) 0 0 0 1px inset;
+}
+
+.button[data-variant="outline"]:hover:not(:disabled, [data-disabled]),
+.button[data-variant="outline"][data-popup-open],
+.button[data-variant="outline"][data-pressed] {
+  background: var(--hover);
+}
+
+.button[data-full-width] {
+  width: 100%;
+}
+
+.buttonLabel,
+.buttonShortcut {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buttonLabel {
+  display: block;
+}
+
+.buttonIcon,
+.buttonTrailing {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--content-disabled);
+}
+
+.buttonIcon :where(svg),
+.buttonTrailing :where(svg) {
+  display: block;
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+}
+
+.buttonShortcut {
+  color: var(--content-subtle);
+}
+
+.iconButton {
+  width: var(--size-control);
+  padding: 0;
+}
+
+.iconButton[data-size="compact"] {
+  width: var(--space-500);
+  height: var(--space-500);
+  border-radius: var(--space-100);
+}
+
+.iconButtonIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+}
+
+.iconButtonIcon :where(svg) {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shortcut {
+  display: inline-flex;
+  gap: var(--space-050);
+  color: var(--content-subtle);
+  white-space: nowrap;
+}
+
+.shortcutKey {
+  min-width: 9px;
+  text-align: center;
+}

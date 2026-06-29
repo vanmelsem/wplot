@@ -1,0 +1,11 @@
+import type { BandSeriesState, BarsSeriesState, CandlesSeriesState } from "../domain/range_series";
+import type { InfiniteLinesSeriesState } from "../domain/infinite_lines_series";
+import type { LineSeriesState, ScatterSeriesState, StepSeriesState } from "../domain/time_value_series";
+import type { SeriesSceneAdapter } from "./contracts";
+export declare const LineSeriesSceneAdapter: SeriesSceneAdapter<LineSeriesState>;
+export declare const StepSeriesSceneAdapter: SeriesSceneAdapter<StepSeriesState>;
+export declare const ScatterSeriesSceneAdapter: SeriesSceneAdapter<ScatterSeriesState>;
+export declare const BandSeriesSceneAdapter: SeriesSceneAdapter<BandSeriesState>;
+export declare const BarsSeriesSceneAdapter: SeriesSceneAdapter<BarsSeriesState>;
+export declare const CandlesSeriesSceneAdapter: SeriesSceneAdapter<CandlesSeriesState>;
+export declare const InfiniteLinesSeriesSceneAdapter: SeriesSceneAdapter<InfiniteLinesSeriesState>;

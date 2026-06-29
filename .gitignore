@@ -1,0 +1,28 @@
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lock
+bun.lockb
+coverage/
+.env
+.DS_Store
+*.log
+
+# Generated TypeDoc API reference (npm run docs)
+docs/api/
+
+# Docs/demo site build output
+site/dist/
+
+# Wrangler local state / deploy cache
+.wrangler/
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# npm auth / scratch
+.npmrc
+tmp.txt
+mail.txt
+*.token

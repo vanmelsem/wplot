@@ -1,0 +1,99 @@
+.selectTrigger {
+  display: inline-grid;
+  grid-template-columns: minmax(0, 1fr) var(--space-500);
+  width: var(--primitive-select-width, 100%);
+  padding: 0 0 0 var(--space-200);
+  text-align: left;
+}
+
+.selectTrigger[data-has-icon] {
+  grid-template-columns: var(--size-control) minmax(0, 1fr) var(--space-500);
+  padding-left: 0;
+}
+
+.selectStartIcon,
+.selectIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--content-disabled);
+}
+
+.selectStartIcon {
+  width: var(--size-control);
+  height: var(--size-control);
+}
+
+.selectIcon {
+  width: var(--space-500);
+  height: var(--size-control);
+  color: var(--content-muted);
+}
+
+.selectValue {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectValue[data-placeholder] {
+  color: var(--content-placeholder);
+}
+
+.positioner {
+  z-index: 10;
+  outline: 0;
+}
+
+.popup {
+  min-width: var(--anchor-width);
+  max-width: min(var(--available-width, 320px), calc(100vw - var(--space-600)));
+}
+
+.selectList {
+  max-height: min(453px, var(--available-height, 453px));
+  padding-block: var(--space-100);
+  overflow-y: auto;
+  outline: 0;
+  overscroll-behavior: contain;
+  scroll-padding-block: var(--space-100);
+}
+
+.selectItem {
+  grid-template-columns: 12px minmax(0, 1fr);
+  padding-right: var(--space-500);
+  scroll-margin-block: var(--space-100);
+}
+
+.selectItem[data-disabled] {
+  color: var(--content-subtle);
+}
+
+.indicator {
+  color: currentColor;
+}
+
+.indicator[data-unchecked] {
+  opacity: 0;
+}
+
+.separator {
+  background: var(--divider);
+}
+
+.chevronIcon {
+  display: block;
+  width: 8px;
+  height: 6px;
+  overflow: visible;
+}
+
+.chevronPath {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.15;
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "wplot",
+  "entryPoints": ["src/index.ts", "src/extensions.ts"],
+  "entryPointStrategy": "resolve",
+  "tsconfig": "tsconfig.json",
+  "out": "docs/api",
+  "readme": "README.md",
+  "includeVersion": false,
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "excludeExternals": true,
+  "sort": ["source-order"],
+  "navigationLinks": {
+    "Plugins guide": "https://github.com/vanmelsem/wplot/blob/main/docs/plugins.md",
+    "Benchmarks": "https://github.com/vanmelsem/wplot/blob/main/docs/benchmarks.md"
+  },
+  "categorizeByGroup": true,
+  "externalSymbolLinkMappings": {
+    "wplot": {
+      "AxisSpec": "#"
+    }
+  },
+  "validation": {
+    "notExported": false,
+    "invalidLink": true,
+    "notDocumented": false
+  }
+}

@@ -1,0 +1,933 @@
+/* Every page fills exactly one viewport on desktop (no page overflow); plots run
+ * full-bleed with no card borders. Only mobile scrolls. The bottom-centered nav
+ * floats over the page, so leave a little room at the bottom for it. */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 12px 16px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .page {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+    padding: 12px 10px 72px;
+  }
+}
+
+/* Compact header: title inline with the blurb so it barely costs height. The
+ * left pad clears the floating page menu pinned at the top-left corner. */
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+  padding: 4px 2px 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--content);
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 760px;
+  font-size: var(--font-size-1);
+  line-height: 15px;
+  color: var(--content-dim);
+}
+
+.subtitle code {
+  color: var(--content-muted);
+}
+
+/* Controls row. */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 0 2px;
+  margin-bottom: 12px;
+}
+
+.toolbarSpacer {
+  flex: 1;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fieldLabel {
+  color: var(--content-dim);
+}
+
+/* Stacked plots fill the remaining height, split evenly, divided by hairlines. */
+.stack {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--canvas);
+}
+
+.stack > .panel + .panel {
+  border-top: 1px solid var(--divider);
+}
+
+.panelHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 4px 2px 2px;
+}
+
+.panelTitle {
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-muted);
+}
+
+.panelMeta {
+  font-size: var(--font-size-0);
+  color: var(--content-faint);
+}
+
+/* The plot host area — flexes to fill whatever height is left. */
+.panelBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  position: relative;
+}
+
+/* Overview gallery: a grid of small varied plots, hairline-divided. */
+.grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--divider);
+}
+
+.tile {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--canvas);
+  overflow: hidden;
+}
+
+.tileBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  position: relative;
+}
+
+/* Variations page: the picker scrolls horizontally if it outgrows the row, and
+ * the body flexes to fill whatever height is left below the header/picker. */
+.variantPicker {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.variantPicker::-webkit-scrollbar {
+  display: none;
+}
+
+.variantBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Overview dashboard: an even 2×2 grid, no dividers between tiles. */
+.overviewGrid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  background: var(--canvas);
+}
+
+.overviewCell {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--canvas);
+}
+
+/* KPI sparkline grid: 4 × 2 bare mini-plots, hairline-divided. */
+.sparkGrid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--divider);
+}
+
+.sparkHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 6px 8px 0;
+}
+
+.sparkLabel {
+  font-size: var(--font-size-0);
+  color: var(--content-faint);
+}
+
+.sparkValue {
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--content);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inline legend chips, no chrome. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 3px 2px 0;
+  font-size: var(--font-size-0);
+  color: var(--content-dim);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendSwatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* Overview page: single-column plot index, all demos share the same width. */
+.overviewShell {
+  --overview-surface: #101010;
+  --overview-border: #1d1d1d;
+  --overview-border-strong: #363636;
+
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: #060606;
+  color: var(--content);
+  font-family: var(--font-sans);
+}
+
+.overviewColumn {
+  width: min(960px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 56px 0 96px;
+}
+
+.overviewIntro {
+  display: grid;
+  gap: 9px;
+  padding: 0 0 var(--space-500);
+}
+
+.overviewIntroTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-300);
+}
+
+.overviewBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-200);
+  min-width: 0;
+}
+
+.overviewMark {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border-radius: 0;
+  background: var(--content);
+}
+
+.overviewIntro h1 {
+  max-width: 680px;
+  margin: 0;
+  color: var(--content);
+  font-size: 24px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.overviewIntro span {
+  display: block;
+  max-width: 620px;
+  color: var(--content-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.overviewIntro span strong {
+  color: var(--content);
+  font-weight: var(--font-weight-medium);
+}
+
+.overviewIntroLinks {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-200);
+  flex: 0 0 auto;
+}
+
+.overviewIntroTop a {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: var(--size-control);
+  padding: 0 var(--space-200);
+  border-radius: var(--radius-control);
+  background: var(--control);
+  box-shadow: var(--shadow-control);
+  color: var(--content-muted);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.overviewIntroTop a:hover {
+  background: var(--button-hover);
+  color: var(--content);
+}
+
+.overviewList {
+  display: grid;
+  gap: 54px;
+  margin-top: 46px;
+}
+
+.overviewDemo {
+  scroll-margin-top: 20px;
+  padding: 0;
+}
+
+.overviewDemoHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-400);
+  align-items: start;
+  margin-bottom: var(--space-300);
+}
+
+.overviewDemoTitle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-200);
+}
+
+.overviewDemoTitle span {
+  color: var(--content-faint);
+  font-size: var(--font-size-1);
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.overviewDemoTitle h2 {
+  margin: 0;
+  color: var(--content);
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.overviewDemoTitle + p {
+  max-width: 620px;
+  margin: var(--space-100) 0 0;
+  color: var(--content-faint);
+  font-size: var(--font-size-1);
+  line-height: 1.55;
+}
+
+.overviewExampleFrame {
+  overflow: hidden;
+  border: 0.5px solid var(--overview-border-strong);
+  border-radius: var(--radius-panel-md);
+  background: var(--overview-surface);
+}
+
+.overviewPlotHost {
+  height: 460px;
+  overflow: hidden;
+  background: #000000;
+}
+
+.overviewPlotHostTall {
+  height: 620px;
+}
+
+.overviewPlotHost > .stack {
+  height: 100%;
+}
+
+.overviewPlotHost .panel {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  background: #060606;
+  overflow: hidden;
+}
+
+.overviewPlotHost .stack > .panel + .panel {
+  border-top-color: #ffffff18;
+}
+
+.overviewPlotHost .panelHead,
+.overviewPlotHost .legend {
+  display: none;
+}
+
+.overviewPlotHost .panelBody {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+
+.overviewPlotHost .toolbar {
+  flex-wrap: wrap;
+  padding: 10px 12px 0;
+  margin-bottom: 10px;
+}
+
+.overviewCaption {
+  max-width: 620px;
+  margin: var(--space-200) 0 0;
+  color: var(--content-faint);
+  font-size: var(--font-size-1);
+  line-height: 1.5;
+}
+
+.overviewCodePanel {
+  overflow: hidden;
+  border-top: 0.5px solid var(--overview-border-strong);
+  background: var(--overview-surface);
+}
+
+.overviewCodeBar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-300);
+  height: var(--tab-size-sm);
+  overflow: hidden;
+  border-bottom: 0.5px solid var(--overview-border);
+  background: var(--tab-track);
+  color: var(--content-muted);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+}
+
+.overviewCodeTab {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  height: var(--tab-size-sm);
+  margin-left: -0.5px;
+  padding: 0 var(--tab-padding-sm);
+  border-left: 0.5px solid var(--overview-border);
+  border-right: 0.5px solid var(--overview-border);
+  background: var(--overview-surface);
+  color: var(--content);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+}
+
+.overviewCodeKind {
+  display: flex;
+  align-items: center;
+  height: var(--tab-size-sm);
+  margin-right: var(--space-200);
+  padding: 0;
+  color: var(--content-faint);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+}
+
+.overviewCodeBody {
+  position: relative;
+  max-height: 122px;
+  overflow: hidden;
+  background: var(--overview-surface);
+  color: var(--content);
+  transition: max-height 140ms ease;
+}
+
+.overviewCodeBodyExpanded {
+  max-height: min(70vh, 680px);
+  overflow: auto;
+}
+
+.overviewCodeBody > div:not(.overviewCodeOverlay) {
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--overview-surface);
+}
+
+.overviewCodeBody :global(pre) {
+  color: var(--content) !important;
+  padding: var(--space-300) var(--space-400) !important;
+  background: var(--overview-surface) !important;
+  font-size: 12.5px !important;
+  line-height: 1.55 !important;
+}
+
+.overviewCodeBody :global(code) {
+  color: inherit;
+}
+
+.overviewCodeOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: var(--space-200);
+  border-bottom-left-radius: var(--radius-panel-md);
+  border-bottom-right-radius: var(--radius-panel-md);
+  background: linear-gradient(
+    180deg,
+    rgb(16 16 16 / 0) 0%,
+    rgb(16 16 16 / 0.98) 100%
+  );
+  pointer-events: none;
+}
+
+.overviewCodeReveal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-control);
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: 0 var(--space-200);
+  background: var(--control);
+  box-shadow: var(--shadow-control);
+  color: var(--content-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+  pointer-events: auto;
+}
+
+.overviewCodeReveal:hover {
+  background: var(--button-hover);
+  color: var(--content);
+}
+
+.racingStack {
+  display: grid;
+  grid-template-rows: minmax(0, 1.35fr) minmax(0, 0.78fr);
+  gap: 1px;
+  height: 100%;
+  min-height: 0;
+  background: var(--divider);
+}
+
+.racingStack > .panel {
+  min-height: 0;
+  background: var(--canvas);
+}
+
+.stateDomShell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.stateDomShell > .panel {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.stateLegendDom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  --state-legend-gap: 8px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--state-legend-gap);
+  height: 26px;
+  padding: 0 var(--state-legend-gap);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 4px;
+  background: rgb(10 10 10 / 88%);
+  box-shadow: none;
+  color: var(--content-muted);
+  font-size: 12px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.stateLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--state-legend-gap);
+  white-space: nowrap;
+}
+
+.stateLegendSwatch {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.stateLegendAlpha {
+  background: rgb(92 204 133);
+}
+
+.stateLegendBeta {
+  background: rgb(97 168 199);
+}
+
+.stateTooltipDom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 4px;
+  background: rgb(10 10 10 / 92%);
+  box-shadow: none;
+  color: var(--content);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.stateTooltipAlpha {
+  color: rgb(132 223 157);
+}
+
+.stateTooltipBeta {
+  color: rgb(109 183 218);
+}
+
+.apiShell {
+  --overview-surface: #101010;
+  --overview-border: #1d1d1d;
+  --overview-border-strong: #363636;
+
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: #060606;
+  color: var(--content);
+  font-family: var(--font-sans);
+}
+
+.apiColumn {
+  width: min(900px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 56px 0 96px;
+}
+
+.apiIntro {
+  display: grid;
+  gap: var(--space-200);
+  padding-bottom: var(--space-600);
+}
+
+.apiBack {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: var(--size-control);
+  padding: 0 var(--space-200);
+  border-radius: var(--radius-control);
+  background: var(--control);
+  box-shadow: var(--shadow-control);
+  color: var(--content-muted);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1);
+  text-decoration: none;
+}
+
+.apiBack:hover {
+  background: var(--button-hover);
+  color: var(--content);
+}
+
+.apiIntro h1 {
+  margin: var(--space-300) 0 0;
+  color: var(--content);
+  font-size: 24px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.apiIntro p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--content-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.apiList {
+  display: grid;
+  gap: 44px;
+}
+
+.apiSection {
+  display: grid;
+  gap: var(--space-300);
+}
+
+.apiSectionHead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-200);
+  align-items: baseline;
+}
+
+.apiSectionHead > span {
+  color: var(--content-faint);
+  font-size: var(--font-size-1);
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.apiSectionHead h2 {
+  margin: 0;
+  color: var(--content);
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.apiSectionHead p {
+  max-width: 640px;
+  margin: var(--space-100) 0 0;
+  color: var(--content-faint);
+  font-size: var(--font-size-1);
+  line-height: 1.55;
+}
+
+.apiCodeCard {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 24px 20px;
+  border: 1px solid #1f1f1f;
+  border-radius: 4px;
+  background: #000000;
+}
+
+.apiCodeCard > div {
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.apiCodeCard :global(pre) {
+  width: max-content;
+  min-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: #e1e4e8 !important;
+  font-family: Menlo, 'Menlo-Regular', ui-monospace, 'SF Mono', Consolas, monospace !important;
+  font-feature-settings: 'calt' 0, 'ss02', 'ss03', 'ss06', 'ss07', 'ss08', 'ss09';
+  font-size: 13px !important;
+  line-height: 16px !important;
+}
+
+.apiCodeCard :global(code) {
+  color: inherit;
+}
+
+/* Benchmark / Load stat tiles. */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 132px;
+  padding: 9px 12px;
+  border-radius: var(--radius-panel-sm);
+  background: var(--control);
+  box-shadow: var(--shadow-control);
+}
+
+.statLabel {
+  font-size: var(--font-size-0);
+  color: var(--content-faint);
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  color: var(--content);
+  font-variant-numeric: tabular-nums;
+}
+
+.statUnit {
+  font-size: var(--font-size-1);
+  color: var(--content-dim);
+}
+
+.statHint {
+  font-size: var(--font-size-0);
+  color: var(--content-faint);
+}
+
+/* Mobile overrides — placed AFTER the base rules so they win (media queries
+ * don't raise specificity). On mobile the page is auto-height and scrollable,
+ * so flex:1 plots would collapse to 0; give every plot a real height instead. */
+@media (max-width: 760px) {
+  .stack {
+    flex: 0 0 auto;
+  }
+  .panel {
+    flex: 0 0 auto;
+  }
+  .panelBody {
+    flex: 0 0 auto;
+    height: 48svh;
+    min-height: 260px;
+  }
+  /* Overview grid: stack to one column with real tile heights. */
+  .grid {
+    flex: 0 0 auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: 240px;
+  }
+  .variantBody {
+    flex: 0 0 auto;
+  }
+  /* Sparkline grid: two columns with real heights on mobile. */
+  .sparkGrid {
+    flex: 0 0 auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: 150px;
+  }
+}
+
+@media (max-width: 980px) {
+  .overviewColumn {
+    width: min(820px, calc(100vw - 28px));
+  }
+  .apiColumn {
+    width: min(820px, calc(100vw - 28px));
+  }
+}
+
+@media (max-width: 760px) {
+  .overviewColumn {
+    width: calc(100vw - 24px);
+    padding: 34px 0 72px;
+  }
+  .overviewDemo {
+    padding: 0;
+  }
+  .overviewDemoHead {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .overviewPlotHost {
+    height: 390px;
+  }
+  .overviewPlotHostTall {
+    height: 560px;
+  }
+  .overviewPlotHost > .stack {
+    flex: none;
+    height: 100%;
+  }
+  .overviewPlotHost .panel {
+    flex: 1 1 auto;
+    height: auto;
+  }
+  .overviewPlotHost .panelBody {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+  .overviewPlotHost .toolbarSpacer {
+    display: none;
+  }
+  .apiColumn {
+    width: calc(100vw - 24px);
+    padding: 34px 0 72px;
+  }
+  .apiList {
+    gap: 38px;
+  }
+}

@@ -1,0 +1,20 @@
+.prose {
+  color: var(--content-muted);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+}
+
+.prose :where(p, h1, h2, h3) {
+  margin: 0;
+}
+
+.prose :where(h1, h2, h3) {
+  color: var(--content);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1);
+}
+
+.prose :where(p + p) {
+  margin-top: var(--space-200);
+}
